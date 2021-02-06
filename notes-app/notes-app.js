@@ -9,3 +9,6 @@ const notes = [{
     body: 'Get a new seat'
 }]
 
+document.querySelector('#search-text').addEventListener('input', e => {
+    console.log(e.target.value)
+})
