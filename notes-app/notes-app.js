@@ -8,3 +8,4 @@ const notes = [{
     title: 'Office modification',
     body: 'Get a new seat'
 }]
+
