@@ -1,16 +1,14 @@
-const notes = [{
-    title: 'my next trip',
-    body: 'I would like to go to spain'
-}, {
-    title: 'Habbits to work on',
-    body: 'Exercise. Eating a bit better'
-}, {
-    title: 'Office modification',
-    body: 'Get a new seat'
-}]
+let notes = []
 
 const filters = {
     searchText: ''
+}
+
+// check for existing saved data
+const notesJSON = localStorage.getItem('notes')
+
+if (notesJSON !== null) {
+    notes = JSON.parse(notesJSON)
 }
 
 const renderNotes = (notes, filters) => {
@@ -24,12 +22,27 @@ const renderNotes = (notes, filters) => {
     // showing each note on screen based on filtered notes
     filteredNotes.forEach((note) => {
         const noteEl = document.createElement('p')
-        noteEl.textContent = note.title
+
+        if (note.title.length > 0) {
+            noteEl.textContent = note.title
+        } else {
+            noteEl.textContent = 'Unamed note'
+        }
+        
         document.querySelector('#notes').appendChild(noteEl)
     })
 }
 
 renderNotes(notes, filters)
+
+document.querySelector('#create-note').addEventListener('click', e => {
+    notes.push({
+        title: '',
+        body: ''
+    })
+    localStorage.setItem('notes', JSON.stringify(notes))
+    renderNotes(notes, filters)
+})
 
 document.querySelector('#search-text').addEventListener('input', e => {
     // updating filters search text to e.target.value, wich is what is being typed on input
