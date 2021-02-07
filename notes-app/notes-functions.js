@@ -16,15 +16,22 @@ const saveNotes = (notes) => {
 
 // Generate the DOM structure for a note
 const generateNoteDOM = (note) => {
-    const noteEl = document.createElement('p')
+    const noteEl = document.createElement('div')
+    const textEl = document.createElement('span')
+    const button = document.createElement('button')
 
-        if (note.title.length > 0) {
-            noteEl.textContent = note.title
-        } else {
-            noteEl.textContent = 'Unamed note'
-        }
+    button.textContent = 'x'
+    noteEl.appendChild(button)
 
-        return noteEl
+    if (note.title.length > 0) {
+        textEl.textContent = note.title
+    } else {
+        textEl.textContent = 'Unamed note'
+    }
+
+    noteEl.appendChild(textEl)
+
+    return noteEl
 }
 
 // Render application notes
