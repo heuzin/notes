@@ -2,9 +2,9 @@
 const getSavedNotes = () => {
     const notesJSON = localStorage.getItem('notes')
 
-    if (notesJSON !== null) {
+    try {
         return JSON.parse(notesJSON)
-    } else {
+    } catch(e) {
         return []
     }
 }
