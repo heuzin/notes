@@ -89,6 +89,7 @@ const sortNotes = (notes, sortBy) => {
 
 // Render application notes
 const renderNotes = (notes, filters) => {
+    const notesEl = document.querySelector('#notes')
     notes = sortNotes(notes, filters.sortBy)
     // filtering notes based on search text
     // if notes title includes filters search text
@@ -96,12 +97,20 @@ const renderNotes = (notes, filters) => {
         return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
     })
 
-    document.querySelector('#notes').innerHTML = ''
-    // showing each note on screen based on filtered notes
-    filteredNotes.forEach((note) => {   
-        const noteEl = generateNoteDOM(note)
-        document.querySelector('#notes').appendChild(noteEl)
-    })
+    notesEl.innerHTML = ''
+
+    if (filteredNotes.length > 0) {
+        // showing each note on screen based on filtered notes
+        filteredNotes.forEach((note) => {   
+            const noteEl = generateNoteDOM(note)
+            notesEl.appendChild(noteEl)
+        })
+    } else {
+        const emptyMessage = document.createElement('p')
+        emptyMessage.textContent = 'No notes to show'
+        emptyMessage.classList.add('empty-message')
+        notesEl.appendChild(emptyMessage)
+    }
 }
 
 // Generate the last edited message
