@@ -2,7 +2,7 @@
 
 This is a sample JavaScript notes app done step-by-step.
 
-Check the demo hosted on https://github.com/heuzin/notes.git.
+Check the demo hosted on  https://notes-app-javascript.netlify.app.
 
 ---
 
@@ -10,7 +10,7 @@ Check the demo hosted on https://github.com/heuzin/notes.git.
 
 First clone this repository.
 ```bash
-$ git clone https://notes-app-javascript.netlify.app
+$ git clone https://github.com/heuzin/notes.git
 ```
 
 Install dependencies. Make sure you already have [`nodejs`](https://nodejs.org/en/) & [`npm`](https://www.npmjs.com/) installed in your system.
