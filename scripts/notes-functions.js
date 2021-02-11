@@ -1,24 +1,24 @@
-// Read existing notes from local storage
+'use strict'
+
+// Read existing notes from localStorage
 const getSavedNotes = () => {
     const notesJSON = localStorage.getItem('notes')
 
     try {
-        return JSON.parse(notesJSON)
-    } catch(e) {
+        return notesJSON ? JSON.parse(notesJSON) : []
+    } catch (e) {
         return []
-    }
+    } 
 }
 
-// save notes to localStorage
+// Save the notes to localStorage
 const saveNotes = (notes) => {
     localStorage.setItem('notes', JSON.stringify(notes))
 }
 
 // Remove a note from the list
 const removeNote = (id) => {
-    const noteIndex = notes.findIndex((note) => {
-        return note.id === id
-    })
+    const noteIndex = notes.findIndex((note) => note.id === id)
 
     if (noteIndex > -1) {
         notes.splice(noteIndex, 1)
@@ -35,7 +35,7 @@ const generateNoteDOM = (note) => {
     if (note.title.length > 0) {
         textEl.textContent = note.title
     } else {
-        textEl.textContent = 'Unamed note'
+        textEl.textContent = 'Unnamed note'
     }
     textEl.classList.add('list-item__title')
     noteEl.appendChild(textEl)
@@ -52,7 +52,7 @@ const generateNoteDOM = (note) => {
     return noteEl
 }
 
-// sort notes by one of the three ways
+// Sort your notes by one of three ways
 const sortNotes = (notes, sortBy) => {
     if (sortBy === 'byEdited') {
         return notes.sort((a, b) => {
@@ -84,6 +84,8 @@ const sortNotes = (notes, sortBy) => {
                 return 0
             }
         })
+    } else {
+        return notes
     }
 }
 
@@ -91,17 +93,12 @@ const sortNotes = (notes, sortBy) => {
 const renderNotes = (notes, filters) => {
     const notesEl = document.querySelector('#notes')
     notes = sortNotes(notes, filters.sortBy)
-    // filtering notes based on search text
-    // if notes title includes filters search text
-    const filteredNotes = notes.filter((note) => {
-        return note.title.toLowerCase().includes(filters.searchText.toLowerCase())
-    })
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(filters.searchText.toLowerCase()))
 
     notesEl.innerHTML = ''
 
     if (filteredNotes.length > 0) {
-        // showing each note on screen based on filtered notes
-        filteredNotes.forEach((note) => {   
+        filteredNotes.forEach((note) => {
             const noteEl = generateNoteDOM(note)
             notesEl.appendChild(noteEl)
         })

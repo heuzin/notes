@@ -1,3 +1,5 @@
+'use strict'
+
 let notes = getSavedNotes()
 
 const filters = {
@@ -7,9 +9,10 @@ const filters = {
 
 renderNotes(notes, filters)
 
-document.querySelector('#create-note').addEventListener('click', e => {
+document.querySelector('#create-note').addEventListener('click', (e) => {
     const id = uuidv4()
     const timestamp = moment().valueOf()
+
     notes.push({
         id: id,
         title: '',
@@ -21,13 +24,12 @@ document.querySelector('#create-note').addEventListener('click', e => {
     location.assign(`/edit.html#${id}`)
 })
 
-document.querySelector('#search-text').addEventListener('input', e => {
-    // updating filters search text to e.target.value, wich is what is being typed on input
+document.querySelector('#search-text').addEventListener('input', (e) => {
     filters.searchText = e.target.value
     renderNotes(notes, filters)
 })
 
-document.querySelector('#filter-by').addEventListener('change', e => {
+document.querySelector('#filter-by').addEventListener('change', (e) => {
     filters.sortBy = e.target.value
     renderNotes(notes, filters)
 })
