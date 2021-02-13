@@ -14,6 +14,11 @@ const loadNotes = () => {
     } 
 }
 
+// Save the notes to localStorage
+const saveNotes = () => {
+    localStorage.setItem('notes', JSON.stringify(notes))
+}
+
 // Expose notes frmo module
 const getNotes = () => notes
 
@@ -28,8 +33,10 @@ const createNote = () => {
         createdAt: timestamp,
         updatedAt: timestamp
     })
+
+    saveNotes()
 }
 
 notes = loadNotes()
 
-export { getNotes, createNote }
+export { getNotes, createNote, saveNotes }
