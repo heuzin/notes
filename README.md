@@ -37,4 +37,4 @@ $ live-server
 
 ## Screenshot
 
-![GitHub Logo](/images/notes-app.png)
+![GitHub Logo](/public/images/notes-app.png)
